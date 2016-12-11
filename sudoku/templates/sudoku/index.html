@@ -1,0 +1,31 @@
+{% load static %}
+{% load sudoku_extras %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sudoku/style.css' %}">
+    <script src="{% static 'sudoku/script.js' %}"></script>
+  </head>
+  <body>
+    <div id="holder">
+      <h1>Sudoku Solver</h1>
+      <button onclick="fillPuzzle()">Hardest Sudoku in the World</button>
+      <button onclick="clearPuzzle()">Clear</button>
+        <form action="/sudoku/" method="get">
+          <table>
+            {% for n in "123456789" %}
+            <tr>
+            {% for l in "ABCDEFGHI" %}
+              <td>
+                <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="{{ values|letter:l|number:n }}" class="square" maxlength="1" size="1">
+              </td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+          <input id="solve" type="submit" value="Solve">
+        </form>
+      </div>
+  </body>
+</html>
