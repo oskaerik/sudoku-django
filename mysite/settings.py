@@ -25,7 +25,10 @@ SECRET_KEY = '2el^%(n(fntm@a@323=9)&##go6a=ayec0-+xyq)@4kkr64l!%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['oskaerik.pythonanywhere.com']
+ALLOWED_HOSTS = [
+	'oskaerik.pythonanywhere.com',
+	'localhost',
+]
 
 
 # Application definition
