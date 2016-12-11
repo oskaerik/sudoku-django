@@ -1,0 +1,42 @@
+body {
+  font-family: Georgia, serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 30pt;
+}
+
+td:first-child {
+  border-left:solid;
+}
+td:nth-child(3n) {
+  border-right:solid ;
+}
+tr:first-child td {
+  border-top:solid;
+}
+tr:nth-child(3n) td {
+  border-bottom:solid ;
+}
+
+.square {
+  margin: 0;
+  padding: 0;
+  font-size: 16pt;
+  width: 24pt;
+  height: 24pt;
+  text-align: center;
+}
+
+#holder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#solve {
+  margin-top: 10pt;
+  font-size: 16pt;
+}
