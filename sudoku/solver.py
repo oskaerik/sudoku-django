@@ -143,7 +143,7 @@ class Solver(object):
     def solve(self, mother):
         """Solves the puzzle recursively"""
         # Checks for time out
-        if (time.time() - self.start_time) > 30:
+        if (time.time() - self.start_time) > 120:
             print("Timed out")
             return False
 

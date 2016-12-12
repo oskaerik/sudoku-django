@@ -9,8 +9,9 @@ function clearPuzzle() {
   }
 }
 
-function fillPuzzle() {
-  var arto = `Arto Inkala
+function fillPuzzle(puzzle) {
+  var preset = [];
+  preset[0] = `Arto Inkala
 800000000
 003600000
 070090200
@@ -20,42 +21,27 @@ function fillPuzzle() {
 001000068
 008500010
 090000400`;
-arto = arto.split("\n");
-  for (r = 1; r < 10; r++) {
-    var line = arto[r].split("");
-    for (c = 0; c < 9; c++) {
-      // If the number isn't a zero
-      if (line[c] != "0") {
-        var square = letters[c] + numbers[r-1];
-        document.getElementById(square).value = line[c];
+
+  preset[1] = `SudokuWiki Unsolveable #26
+600008940
+900006100
+070040000
+200610000
+000000200
+089002000
+000060005
+000000030
+800001600`
+  clearPuzzle();
+  sudoku = preset[puzzle].split("\n");
+    for (r = 1; r < 10; r++) {
+      var line = sudoku[r].split("");
+      for (c = 0; c < 9; c++) {
+        // If the number isn't a zero
+        if (line[c] != "0") {
+          var square = letters[c] + numbers[r-1];
+          document.getElementById(square).value = line[c];
+        }
       }
     }
-  }
 }
-
-/*
-function fillPuzzle() {
-  clearPuzzle();
-  document.getElementById("A1").value = "8";
-  document.getElementById("C2").value = "3";
-  document.getElementById("D2").value = "6";
-  document.getElementById("B3").value = "7";
-  document.getElementById("E3").value = "9";
-  document.getElementById("G3").value = "2";
-  document.getElementById("B4").value = "5";
-  document.getElementById("F4").value = "7";
-  document.getElementById("E5").value = "4";
-  document.getElementById("F5").value = "5";
-  document.getElementById("G5").value = "7";
-  document.getElementById("D6").value = "1";
-  document.getElementById("H6").value = "3";
-  document.getElementById("C7").value = "1";
-  document.getElementById("H7").value = "6";
-  document.getElementById("I7").value = "8";
-  document.getElementById("C8").value = "8";
-  document.getElementById("D8").value = "5";
-  document.getElementById("H8").value = "1";
-  document.getElementById("B9").value = "9";
-  document.getElementById("G9").value = "4";
-}
-*/
