@@ -1,7 +1,7 @@
 #sudoku-django
 ##An in-browser sudoku solver written in Python using Django
 
-The solver is uploaded on: http://oskaerik.pythonanywhere.com/
+The solver is hosted on: http://oskaerik.pythonanywhere.com/
 
 If you want to run the solver locally:
 
