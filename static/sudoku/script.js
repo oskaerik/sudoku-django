@@ -1,6 +1,7 @@
+var letters = "ABCDEFGHI".split("");
+var numbers = "123456789".split("");
+
 function clearPuzzle() {
-  var letters = "ABCDEFGHI".split("");
-  var numbers = "123456789".split("");
   for (l = 0; l < 9; l++) {
     for (n = 0; n < 9; n++) {
       document.getElementById(letters[l] + numbers[n]).value = "";
@@ -8,6 +9,31 @@ function clearPuzzle() {
   }
 }
 
+function fillPuzzle() {
+  var arto = `Arto Inkala
+800000000
+003600000
+070090200
+050007000
+000045700
+000100030
+001000068
+008500010
+090000400`;
+arto = arto.split("\n");
+  for (r = 1; r < 10; r++) {
+    var line = arto[r].split("");
+    for (c = 0; c < 9; c++) {
+      // If the number isn't a zero
+      if (line[c] != "0") {
+        var square = letters[c] + numbers[r-1];
+        document.getElementById(square).value = line[c];
+      }
+    }
+  }
+}
+
+/*
 function fillPuzzle() {
   clearPuzzle();
   document.getElementById("A1").value = "8";
@@ -32,3 +58,4 @@ function fillPuzzle() {
   document.getElementById("B9").value = "9";
   document.getElementById("G9").value = "4";
 }
+*/
