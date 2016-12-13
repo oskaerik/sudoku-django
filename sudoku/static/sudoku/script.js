@@ -22,7 +22,7 @@ function fillPuzzle(puzzle) {
 008500010
 090000400`;
 
-  preset[1] = `SudokuWiki Unsolveable #26
+  preset[1] = `SudokuWiki Unsolveable #28
 600008940
 900006100
 070040000

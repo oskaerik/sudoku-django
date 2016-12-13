@@ -1,5 +1,7 @@
 """Contains the Solver class"""
-import copy, time
+import copy
+import time
+import os
 
 
 def solved(values):
@@ -10,6 +12,11 @@ def solved(values):
         elif len(values[u]) > 1:
             return 0
     return 1
+
+
+def clear():
+    if __name__ == "__main__":
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 
 class Solver(object):
@@ -58,18 +65,33 @@ class Solver(object):
         # Parse the input lines
         self.parse(input)
 
-
         # Solve the puzzle
         self.start_time = time.time()
         self.values = self.solve(self.values)
 
         if self.values:
+            clear()
             self.paint(self.values)
+            print("Solved in " + str(time.time() - self.start_time) + " seconds")
         else:
-            print("Critical error in solving")
+            print("The puzzle was not solvable")
 
     def parse(self, input):
         for key in input:
+            # Abort if there are duplicate values as input in the same row, column or box
+            if input[key] in "123456789":
+                for u in self.rows[key]:
+                    if u != key and u in input and input[u] == input[key]:
+                        self.values = False
+                        return
+                for u in self.columns[key]:
+                    if u != key and u in input and input[u] == input[key]:
+                        self.values = False
+                        return
+                for u in self.boxes[key]:
+                    if u != key and u in input and input[u] == input[key]:
+                        self.values = False
+                        return
             self.assign(self.values, key, input[key])
 
     def remove(self, values, key, value):
@@ -113,14 +135,15 @@ class Solver(object):
             if not u == key:
                 self.remove(values, u, value)
 
-    def single(self, values, dictionary, key, value):
+    def single(self, values, group, key, value):
         """Checks if there is only a single place a value can fit"""
-        candidate = list()
-        for u in dictionary[key]:
+        candidates = list()
+        for u in group[key]:
             if value in values[u]:
-                candidate.append(u)
-        if len(candidate) == 1 and len(values[candidate[0]]) > 1:
-            self.assign(values, candidate[0], value)
+                candidates.append(u)
+        # Check for a single place the value can fit
+        if len(candidates) == 1 and len(values[candidates[0]]) > 1:
+            self.assign(values, candidates[0], value)
 
     def paint(self, values):
         """Paints the grid in standard out"""
@@ -132,9 +155,9 @@ class Solver(object):
                 if c % 3 == 0 and c != 0:
                     print(" |", end="")
                 if len(values[l + n]) > 1:
-                    print(" ?", end="")
+                    print("  ", end="")
                 elif len(values[l + n]) < 1:
-                    print(" X", end="")
+                    print("  ", end="")
                 else:
                     print(" " + values[l + n], end="")
             print(" |")
@@ -142,6 +165,11 @@ class Solver(object):
 
     def solve(self, mother):
         """Solves the puzzle recursively"""
+        if not mother:
+            return False
+        if __name__ == "__main__":
+            clear()
+            self.paint(mother)
         # Checks for time out
         if (time.time() - self.start_time) > 120:
             print("Timed out")
@@ -175,3 +203,19 @@ class Solver(object):
             for n in self.numbers:
                 if len(values[l + n]) > 1:
                     return l + n, values[l + n][0]
+
+
+if __name__ == "__main__":
+    print("Was main, solving")
+    puzzle = "800000000003600000070090200050007000000045700000100030001000068008500010090000400"  # arto
+    #puzzle = "600008940900006100070040000200610000000000200089002000000060005000000030800001600"  # wiki
+    val = dict()
+    let = "ABCDEFGHI"
+    num = "123456789"
+    # Add values to dict
+    for n in range(0, 9):
+        for l in range(0, 9):
+            val[let[l] + num[n]] = puzzle[n * 9 + l]
+
+    solver = Solver(val)
+
