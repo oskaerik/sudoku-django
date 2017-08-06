@@ -1,5 +1,5 @@
-#sudoku-django
-##An in-browser sudoku solver written in Python using Django
+# sudoku-django
+## An in-browser sudoku solver written in Python using Django
 
 The solver is hosted on: http://oskaerik.pythonanywhere.com/
 
